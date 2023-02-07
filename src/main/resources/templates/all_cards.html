@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Все карточки</title>
+</head>
+<body>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">Название</th>
+        <th scope="col">Вопрос</th>
+        <th scope="col">Тег</th>
+    </tr>
+    </thead>
+    <tr th:each="card : ${cards}">
+        <td th:text="${card.nameCard}"></td>
+        <td th:text="${card.textFromFrontSideCard}"></td>
+        <td th:text="${card.tegCard}"></td>
+    </tr>
+</table>
+</body>
+</html>

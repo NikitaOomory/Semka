@@ -1,10 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Главная</title>
+    <link rel="stylesheet" href="/cards.css">
 </head>
+
 <body>
 
+<img src="/cat.jpg" height="50%" width="25%">
+
+<p><a href="interview"><input type="submit" value="Устрой собес"></a></p>
+<p><a href="/add_card"><input type="submit" value="Добавить карточку"></a></p>
+<p><a href="/all_cards"><input type="submit" value="Все карточки"></a></p>
+
+<p th:text="${text}"></p>
+
+<div class="card">
+    <div class="card__front">Кого ты любишь?</div>
+    <div class="card__back">Правильный ответ - своего кота!</div>
+</div>
+
 </body>
+
 </html>
