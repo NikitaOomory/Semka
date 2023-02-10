@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta name="viewport" content="width=320, initial-scale=1">
+  <meta charset="utf-8">
+</head>
+
+<body>
+
+<p><a href="/"><input type="submit" value="Домой"></a></p>
+
+<form method="post">
+  <div>
+    <select name="tag">
+      <option>Программирование</option>
+      <option>Тестовые карточки</option>
+      <option>Кошачьи дела</option>
+    </select>
+  </div>
+  <div><input type="text" name="nameCard" placeholder="Название карточки"></div>
+  <div><input type="text" name="question" placeholder="Введите вопрос"></div>
+  <div><textarea placeholder="Введите ответ" name="answer"></textarea></div>
+  <div><p><input type="submit" value="Сохранить"></p></div>
+</form>
+
+</body>
+
+</html>

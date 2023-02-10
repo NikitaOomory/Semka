@@ -1,6 +1,8 @@
 package com.example.semka.controllers;
 
+import com.example.semka.CrudMemoCardImp;
 import com.example.semka.MemoCard;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,56 +11,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("/add_card")
 public class AddCardPageController {
 
-    File der = new File("cards");
+    @Autowired
+    CrudMemoCardImp crudMemoCard = new CrudMemoCardImp();
 
     @GetMapping
     public String getAddCardPage(Model model){
-        List groupTeg = new ArrayList<>(){{
-           add("Программирование");
-           add("Психология");
-           add("Английский");
-        }};
-        model.addAttribute("list", groupTeg);
+        model.addAttribute("list", getArrayListTegForPage());
         return "add_card";
     }
 
+    public ArrayList<String> getArrayListTegForPage(){
+        ArrayList <String> groupTeg = new ArrayList<>(){{
+            add("Программирование");
+            add("Психология");
+            add("Английский");
+        }};
+        return groupTeg;
+    }
+
     @PostMapping
-    public String saveCardInFile(
-            @RequestParam String teg,
+    public String saveCardInFileAndRedirectAllCardsPage(
+            @RequestParam String tag,
             @RequestParam String nameCard,
             @RequestParam String question,
             @RequestParam String answer,
             Model model
     ){
-        MemoCard newCard = new MemoCard(teg,nameCard,question,answer,"date");
-        File file = new File("cards/" + nameCard + ".txt");
-
-        if(!der.exists())
-            der.mkdir();
-        if(!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-        if(!nameCard.isEmpty()){
-            try(ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(file))){
-                stream.writeObject(newCard);
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
+        MemoCard newCard = new MemoCard(tag,nameCard,question,answer);
+        crudMemoCard.saveMemoCardInFile(newCard);
         return "redirect:/all_cards";
     }
 }

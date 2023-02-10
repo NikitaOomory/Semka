@@ -5,18 +5,21 @@
     <title>Все карточки</title>
 </head>
 <body>
+<p><a href="/"><input type="submit" value="Домой"></a></p>
 <table class="table table-striped">
     <thead>
     <tr>
         <th scope="col">Название</th>
         <th scope="col">Вопрос</th>
         <th scope="col">Тег</th>
+        <th scope="button">Тыкалка</th>
     </tr>
     </thead>
     <tr th:each="card : ${cards}">
         <td th:text="${card.nameCard}"></td>
         <td th:text="${card.textFromFrontSideCard}"></td>
-        <td th:text="${card.tegCard}"></td>
+        <td th:text="${card.getTagCard}"></td>
+        <td><a th:href="'/all_cards/editCard/' + ${card.getNameCard()}" class="ui-button">Тык лапой</a></td>
     </tr>
 </table>
 </body>
