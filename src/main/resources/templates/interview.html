@@ -3,10 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Собеседование</title>
+    <link rel="stylesheet" href="/cards.css">
 </head>
 <body>
 
-  Страничка собеседования
+
+<div th:each="question : ${questions}">
+
+    <div class="card">
+        <div class="card__front" th:text="${question.textFromFrontSideCard}"></div>
+        <div class="card__back" th:text="${question.textFromBackSideCard}"></div>
+    </div>
+
+</div>
 
 </body>
 </html>

@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import java.io.*;
 
 @Controller
@@ -13,7 +12,11 @@ public class MainPageController {
 
     @GetMapping
     public String getMainPage(Model model) throws IOException, ClassNotFoundException {
-        String text;
+        model.addAttribute("text", getTextForPageFromFile());
+        return "main";
+    }
+
+    public String getTextForPageFromFile() throws IOException {
         File file = new File("TextForMainPage");
         if(!file.exists()){
             file.createNewFile();
@@ -26,10 +29,11 @@ public class MainPageController {
                 result.append(buffer);
                 count = reader.read(buffer);
             }
-            text = result.toString();
+            return result.toString();
         }
-        model.addAttribute("text", text);
-        return "main";
+        catch (IOException e){
+            return "Ошибка чтения из файла";
+        }
     }
 
 }
